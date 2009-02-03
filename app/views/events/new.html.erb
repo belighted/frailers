@@ -1,0 +1,9 @@
+<h1><%= @page_title="Nouvel événement" %></h1>
+
+<% form_for :event, :url => events_path, :html => { :multipart => true } do |form| -%>
+
+  <%= render :partial=>"form", :object => form %>
+
+  <p><%= submit_tag "Créer l'événement" %></p>
+
+<% end -%>

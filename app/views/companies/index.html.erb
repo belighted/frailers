@@ -1,0 +1,19 @@
+<% @right_column = render(:partial=>'column') %>
+
+<h1><%= @page_title = "Sociétés" %> <span class="subtitle">Il y a <%= pluralize(@company_count,"sociétés") %></span></h1>
+
+<% unless @company_count.zero? %>
+
+  <p class="pagination" style="font-size:70%;margin-bottom:16px;display:block">
+    <% ('A'..'Z').each do |letter| %>
+      <% if Company.count(:conditions=>"name LIKE '#{letter}%'")>0 %>
+        <%= link_to letter, companies_path(:initial=>letter) %>
+      <% else %>
+        <span class="disabled"><%= letter %></span>
+      <% end %>
+    <% end %>
+  </p>
+
+  <%= render :partial => 'list' %>
+  
+<% end %>

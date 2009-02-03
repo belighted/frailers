@@ -1,0 +1,36 @@
+<%  @right_column = render(:partial=>'column_show') %>
+
+<p style="float:right;margin:0;padding:0"><%= thumbnail_for @company %></p>
+
+<h1><%= @page_title="Société: #{@company.name}" %> <span class="subtitle">créée par <%= link_to @company.owner.display_name, user_path(@company.owner) %> le <%= l(@company.created_at.to_date,:format=>:short) %></span></h1>
+
+<% unless @company.website.blank? %>
+  <h2>Site web</h2>
+  <p><%= link_to(@company.website.gsub("http://",""), "http://" + @company.website.gsub("http://","")) %></p>
+<% end %>
+
+<% unless @company.description.blank? %>
+  <h2>Description</h2>
+  <p class="justify"><%= @company.description %></p>
+<% end %>
+
+<h2>Localisation</h2>
+<p> <%= "#{h(@company.city)}, " unless @company.city.blank? %><%= t("countries.#{@company.country}") %>.</p>
+
+<h2>Membres</h2>
+
+<% if @company.members.any? %>
+
+  <p>Il y a <%= link_to(pluralize(@company.members.count,"membre"), company_memberships_path(@company)) %>.</p>
+
+  <% @company.members.each do |u| %>
+    <%= link_to(thumbnail_for(u,:thumb25),user_path(u)) %>
+  <% end %>
+  
+  <p><%= link_to "Voir le détail de tous les membres", company_memberships_path(@company) %>.</p>
+
+<% else %>
+
+  <p>Aucun membre pour l'instant.</p>
+
+<% end %>

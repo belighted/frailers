@@ -1,0 +1,28 @@
+<h1><%= @page_title="S'identifier" %></h1>
+
+<% form_tag session_path do -%>
+  <div id="password_fields">
+  <p>
+    <label for="login">Login</label>
+    <br />
+    <%= text_field_tag :login, params[:login] %>
+  </p>
+  <%= hidden_field_tag :to, params[:to] if params[:to] %>
+  <p>
+    <label for="password">Mot de passe</label><br />
+    <%= password_field_tag :password %>
+  </p>
+  </div>
+
+  <p><%= check_box_tag "remember_me", "1", true %> Se souvenir de moi sur cet ordinateur</p>
+
+  <p><%= submit_tag "S'identifier" %> ou <%= link_to_function('réinitialiser son mot de passe', "$('reset-password').toggle();") %></p>
+<% end -%>
+
+<% form_tag users_path, :id => 'reset-password', :style => 'display:none' do -%>
+  <h2>Réinitialiser son mot de passe</h2>
+  <p>Entrez votre adresse email, et une nouvelle clef d'identification vous sera envoyée. Cliquez sur le lien contenu dans l'email pour vous identifier sur le site, puis changez votre mot de passe.</p>
+  <p><%= text_field_tag :email, "", :size => 30 %> <%= submit_tag "Envoyer l'email" %> ou <%= link_to_function('annuler', "$('reset-password').hide()") %></p>
+<% end -%>
+
+<%= javascript_tag "$('login').focus();"%>

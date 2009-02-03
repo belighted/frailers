@@ -1,0 +1,51 @@
+<div id='<%="article#{@article.id}" %>' class="article">
+  <div class="title">
+    <div class="date">
+      <% if @article.published? %>
+      <div class="day"><%= @article.published_at.day %></div>
+      <div class="month"><%= @article.published_at.strftime("%b %y") %></div>
+      <% else %>
+      <div class="day" style="color:red">NON</div>
+      <div class="month">PUBLIE</div>
+      <% end %>
+    </div>
+  	<h1><%= link_to @article.title, article_path(@article) %> 
+     <% if admin? %><span style="font-size:small">
+      [<%= link_to 'edit', edit_article_path(@article) %> | 
+       <%= link_to 'delete', article_path(@article), :method=>:delete %>]</span>
+     <%end%>
+    </h1>
+  </div>
+  <div class="content">
+    <div class="info">
+      Publié par <%= @article.author ? link_to(@article.author.display_name,user_path(@article.author)) : "inconnu" %> | 
+      <%= link_to pluralize(@article.comments.count, 'commentaire'), article_path(@article) %>                             
+    </div>
+    <strong><%= @article.summary %></strong>
+    <p><%= @article.content_with_code %></p>
+  </div>
+</div>
+
+<%# ==================================================================================================== %>
+
+<h2><%= pluralize @article.comments.count, 'Commentaire' %></h2>
+  <% @article.comments.each do |comment| %>
+    <%= render :partial=>'/comments/comment', :object=>comment %>
+  <% end %>
+
+<h3>Ajouter un commentaire</h3>
+
+<% if logged_in? %>
+
+  <% form_for :comment, :url=>article_comments_path(@article) do |f| %>
+    <p>
+      <%= render :partial=>'/comments/form', :locals=>{:f=>f} %>
+      <%= submit_tag "Envoyer le commentaire" %>
+    </p>
+  <% end %>
+
+<% else %>
+
+  <p>Vous devez être identifié pour poster un commentaire. <%= link_to "Identifiez-vous", login_path %>, ou <%= link_to "inscrivez-vous", signup_path %> si ce n'est déjà fait.</p>
+
+<% end %>

@@ -1,0 +1,5 @@
+<tr class="<%= cycle('odd','even') %>">
+  <td><%= link_to(thumbnail_for(user,:thumb25), user_path(user)) %></td>
+  <td><%= link_to h(user.display_name), user_path(user) %></td>
+  <td><%= "#{h(user.city)}, " unless user.city.blank? %><%= t("countries.#{user.country}") %></td>
+</tr>

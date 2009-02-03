@@ -1,0 +1,32 @@
+<% @right_column = render(:partial=>'column') %>
+
+<div id="articles">
+  <% @articles.each do |article| %>
+  <div id='<%="article#{article.id}" %>' class="article">
+    <div class="title">
+      <div class="date">
+        <% if article.published? %>
+        <div class="day"><%= article.published_at.day %></div>
+        <div class="month"><%= article.published_at.strftime("%b %y") %></div>
+        <% else %>
+        <div class="day" style="color:red">NON</div>
+        <div class="month">PUBLIE</div>
+        <% end %>
+      </div>
+    	<h1><%= link_to article.title, article_path(article) %> 
+       <% if admin? %><span style="font-size:small">
+        [<%= link_to 'edit', edit_article_path(article) %> | 
+         <%= link_to 'delete', article_path(article), :method=>:delete %>]</span>
+       <%end%>
+      </h1>
+    </div>
+    <div class="content">
+      <div class="info">
+        Publié par <%= article.author ? link_to(article.author.display_name,user_path(article.author)) : "inconnu" %> | 
+        <%= link_to pluralize(article.comments.count, 'commentaire'), article_path(article) %>                             
+      </div>
+      <p><%= article.summary.blank? ? article.content_with_code : article.summary %></p>
+    </div>
+  </div>
+  <% end -%>
+</div>

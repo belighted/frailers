@@ -1,0 +1,21 @@
+<p>
+    <b>Titre</b><br />
+    <%= f.text_field :title %>
+</p>
+
+<p>
+    <b>Abstract</b><br />
+    <%= textile_editor :article, :summary, :id=>'textile-editor1', :rows=>10 %>
+</p>
+
+<p>
+    <b>Contenu</b><br />
+    <%= textile_editor :article, :content, :id=>'textile-editor2', :rows=>10 %>
+</p>
+
+<p>
+  <b><%= f.check_box :published, :onclick=>"if(this.checked) { $('span_published_at').show() } else { $('span_published_at').hide() }" %> Publié?</b><br/>
+  <span id="span_published_at" <%= "style='display:none'" unless @article.published? %>>Date de publication: <%= f.date_select :published_at %></span>
+</p>
+
+<%= textile_editor_initialize -%>

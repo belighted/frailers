@@ -1,0 +1,11 @@
+.DS_Store
+log/*.log
+tmp/**/*
+db/*.sqlite3
+vendor/plugins/**/doc
+db/schema.rb
+public/uploads
+database.yml
+exceptional.yml
+password_salt.yml
+frailers.sql

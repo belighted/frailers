@@ -1,0 +1,12 @@
+<table border="0" cellspacing="0" cellpadding="0" class="wide list with_thumbnails">
+  <tr>
+    <th></th>
+    <th>Pseudo</th>
+    <th>Origine</th>
+  </tr>
+  <% users.each do |user| -%>  
+    <%= render :partial=>"users/list_item_larger", :locals => { :user => user } %>
+  <% end %>
+</table>
+
+<span style="text-align:right"><%= pagination users %></span>

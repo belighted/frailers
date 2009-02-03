@@ -1,0 +1,18 @@
+<% if logged_in? %>
+<div id="find" class="element">
+  <div class="content">
+	<ul>
+		<% if admin? || (@company.owner==current_user) %>
+    <li><%= link_to "Editer cette société", edit_company_path(@company), :class=>"company_edit" %></li>
+    <li><%= link_to "Supprimer cette société", company_path(@company), :method=>:delete,  :class=>"company_delete" %></li>
+    <% end %>
+    <li><%= link_to "Ajouter une société", new_company_path, :class=>"company_new" %></li>
+    <% if @membership=@company.memberships.find_by_user_id(current_user) %>
+      <li><%= link_to "Se désinscrire de cette société", company_membership_path(@company,@membership), :method=>:delete, :class=>"company_unsubscribe" %></li>
+    <% else %>
+      <li><%=link_to "S'inscrire à cette société", company_memberships_path(@company), :method=>:post, :class=>"company_subscribe" %></li>
+    <% end %>
+  </ul>
+  </div>  
+</div>
+<% end %>

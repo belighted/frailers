@@ -1,0 +1,6 @@
+<tr class="<%= cycle('odd','even') %>">
+  <td><%= link_to(thumbnail_for(company,:thumb25), company_path(company)) %></td>
+  <td><%= link_to h(company.name), company_path(company) %></td>
+  <td><%= t("countries.#{company.country}") %></td>
+  <td><%= link_to company.members.count, company_memberships_path(company) %></td>
+</tr>

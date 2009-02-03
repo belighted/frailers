@@ -1,0 +1,33 @@
+<%  @right_column = render(:partial=>'column_show') %>
+
+<p style="float:right;margin:0;padding:0"><%= thumbnail_for @event %></p>
+
+<h1><%= @page_title="Evénement: #{@event.name}" %> <span class="subtitle">créé par <%= link_to @event.creator.display_name, user_path(@event.creator) %>
+  le <%= l(@event.created_at.to_date,:format=>:short) %></span></h1>
+
+<% unless @event.website.blank? %>
+  <h2>Site web</h2>
+  <p><%= link_to(@event.website.gsub("http://",""), "http://" + @event.website.gsub("http://","")) %></p>
+<% end %>
+
+<% unless @event.description.blank? %>
+  <h2>Description</h2>
+  <p class="justify"><%= @event.description %></p>
+<% end %>
+
+<h2>Dates</h2>
+
+<p>
+  <b>Début:</b> <%= l(@event.begins_at.to_date,:format=>:long) %><br/>
+  <b>Fin:</b> <%= l(@event.ends_at.to_date,:format=>:long) %>
+</p>
+
+<h2>Localisation</h2>
+<p>
+  <%= h @event.venue %><br/>
+  <%= h @event.street %>, <%= h @event.street_number %><br/>
+  <%= h @event.postal_code %> <%= h @event.city %><br/>
+  <%= t("countries.#{@event.country}") %>
+</p>
+
+<%= link_to "Voir sur une carte Google Maps", "http://maps.google.fr/maps?q=" + CGI.escape("#{@event.street} #{@event.street_number} #{@event.postal_code} #{@event.city} #{t("countries.#{@event.country}")}") %>

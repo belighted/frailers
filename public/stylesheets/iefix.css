@@ -1,0 +1,9 @@
+/* Transparent images hack : Every transparent images used in css must be redefined here */
+
+
+/*a, input
+{
+z-index: 1;
+}*/
+
+#header {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop src='/images/elements/title.png'); background-image: none;}

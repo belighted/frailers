@@ -1,0 +1,14 @@
+<tr class="<%= cycle('odd','even') %>">
+  <td><%= link_to(thumbnail_for(event), event_path(event)) %></td>
+  <td>
+    <b><%= link_to h(event.name), event_path(event) %></b> (<%= h event.city %>, <%= t("countries.#{event.country}") %>)<br/>
+    <span><%= h event.description %></span><br/>
+  </td>
+  <td>
+    <%= l(event.begins_at.to_date) %>
+    <% if event.ends_at.to_date != event.begins_at.to_date %>
+    - <%= l(event.ends_at.to_date) %>
+    <% end %>
+  </td>
+  <td><%= event.users.count %></td>
+</tr>

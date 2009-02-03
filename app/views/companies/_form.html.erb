@@ -1,0 +1,32 @@
+<p>
+  <label for="company_name">Nom</label><br/>
+  <%= form.text_field :name %><br/>
+  <% if @company.errors.on(:name) %><span class="fieldError">Un nom est obligatoire.</span><% end %>
+</p>
+
+<p>
+  <label for="company_website">Site web</label><br />
+  <%= form.text_field :website %>
+	<span class="entryhelp">(sans le http://)</span><br/>
+  <% if @company.errors.on(:website) %><span class="fieldError">Cet URL n'est pas valide.</span><% end %>
+</p>
+
+<p>
+  <label for="company_description">Description</label><br />
+  <%= form.text_area :description, :rows => 6 %>
+</p>
+
+<p>
+  <label for="company_city">Ville</label><br />
+  <%= form.text_field :city %>
+</p>
+
+<p>
+  <label for="company_country">Pays</label><br />
+  <%= form.localized_country_select(:country, [], :include_blank => 'Choisissez...') %>
+</p>
+
+<p>
+  <%= form.label :picture, "Image" %><br />
+  <%= form.file_field :picture %>
+</p>

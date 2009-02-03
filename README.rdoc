@@ -1,0 +1,13 @@
+==Code source de l'application Frailers.net
+
+Frailers.net est un projet de documentation/communauté pour développeurs Ruby on Rails francophones initialement lancé en septembre 2007. Son code source est disponible depuis février 2009 et ce dans le but d'aider les Railers débutants à voir le fonctionnement d'un site en production.
+
+L'essentiel du code a été refactoré et est donc "à jour" (plugins récents, etc.). Seules certaines rares fonctionnalités doivent encore être retravaillées (ex. couche d'authentification toujours basée sur une ancienne version de restful_authentication).
+
+Points forts:
+- basé sur Rails 2.3
+- utilisation du framework i18n de Rails pour le français
+- mise en évidence de la syntaxe dans le blog (via ultraviolet/oniguruma)
+- 100% RESTful
+
+Pour voir le site en production, l'adresse n'a pas changé: http://www.frailers.net ... N'hésitez pas à venir ajouter votre profil dans notre petite communauté! :)

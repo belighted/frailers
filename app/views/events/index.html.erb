@@ -1,0 +1,17 @@
+<% @right_column = render(:partial=>'column_index') %>
+
+<h1><%= @page_title="Evénements" %> <span class="subtitle">Il y a <%= pluralize(@event_count,"evénement") %></span></h1>
+
+<% unless @event_count.zero? %>
+
+<table border="0" cellspacing="0" cellpadding="0" class="wide list with_thumbnails">
+  <tr>
+    <th></th>
+    <th>Evénement</th>
+    <th>Dates</th>
+    <th>Participants</th>
+  </tr>
+  <%= render :partial => @events %>
+</table>
+  
+<% end %>

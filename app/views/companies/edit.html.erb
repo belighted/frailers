@@ -1,0 +1,9 @@
+<h1><%= @page_title="Edition de la société #{@company.name}" %></h1>
+
+<% form_for :company, :url => company_path(@company), :html => { :multipart => true, :method => :put } do |form| -%>
+
+  <%= render :partial=>"form", :object => form %>
+
+  <p><%= submit_tag "Mettre à jour la société" %></p>
+
+<% end -%>

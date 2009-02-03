@@ -1,0 +1,9 @@
+Nouveau commentaire sur Frailers:
+
+User:   <%= @comment.user.login %> (<%= @url+user_path(@comment.user) %>)
+Target: <%= @comment.target.title %> (<%= @comment.target.is_a?(Post) ? @url+post_path(@comment.target) : @url+article_path(@comment.target) %>)
+
+<%= @comment.content %>
+
+-- 
+Frailers.net

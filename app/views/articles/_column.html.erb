@@ -1,0 +1,45 @@
+<div id="syndication" class="element">
+  <span class="title">Syndication</span>
+  <div class="content">
+      <a href="http://feeds.feedburner.com/FrailersArticles" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0;margin:4px"/></a>&nbsp;<a href="http://feeds.feedburner.com/FrailersArticles" rel="alternate" type="application/rss+xml">Inscrivez-vous au fil RSS</a>
+  </div>
+</div>
+
+<div class="element">
+  <span class="title">Archives</span>
+  <div class="content">
+    <ul>
+    <% Article.published.find(:all,:order=>"published_at DESC").group_by{|p| p.published_at.strftime("%Y-%m")}.sort.reverse.each do |datestring,date_posts| %>
+      <li><%= link_to l((date=date_posts[0].published_at.to_date),:format => :mon_year).capitalize, dated_articles_path(:year=>date.year,:month=>date.month) %> (<%= date_posts.size %>)</li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<div id="about" class="element">
+  <span class="title">A propos de Frailers.net</span>
+  <div class="content">
+    Frailers.net est une initiative visant à aggréger les différentes sources francophones d’information à propos de  Ruby on Rails.
+    <p style="text-align:right;"><%= link_to "A propos...", {:controller => 'static', :action => 'about'}, :style => "font-weight:bold" %></p>
+  </div>
+</div>
+
+<div id="join" class="element">
+  <span class="title">Rejoignez la communauté</span>
+  <div class="content">
+    <p>Pour vous faire connaître dans la communauté rails francophone, ne tardez plus! Créez un compte sur frailers.net!</p>
+    <ul>
+     <li><%= link_to "Créez votre profil", new_user_path, :style => "font-weight:bold" %><br /></li>
+     <li><%= link_to "Découvrez la communauté francophone", users_path, :style => "font-weight:bold" %></li>
+    </ul>
+  </div>
+</div>
+
+<div id="last_users" class="element">
+  <span class="title">Derniers frailers</span>
+  <div class="content" style="text-align:center">
+    <% User.find(:all,:order=>"created_at desc", :conditions=>"picture_file_name IS NOT NULL", :limit=>9).each do |u| %>
+      <%= link_to thumbnail_for(u,:thumb75), user_path(u) %>
+    <% end %>
+  </div>
+</div>

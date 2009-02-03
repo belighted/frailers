@@ -1,0 +1,6 @@
+<div id=<%="comment#{comment.id}" %> class="comment">
+  <div class="title">
+  	Commentaire posté par <%= comment.user ? link_to(comment.user,user_path(comment.user)) : comment.name %> le <%= comment.created_at.strftime("%d/%m/%y") %>
+  </div>
+	<%= comment.content %>
+</div>

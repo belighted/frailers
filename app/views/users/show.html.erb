@@ -1,0 +1,33 @@
+<p style="float:right;margin:0;padding:0"><%= thumbnail_for @user %></p>
+
+<h1>
+  <%= @page_title = h(@user.display_name) -%>
+  <span class="subtitle">inscrit depuis le <%=l(@user.created_at.to_date,:format=>:long) %>
+    <% if logged_in? and @user == current_user %>
+      <%= link_to "[éditer mon profil]", edit_user_path(@user) %>
+    <% end %>
+  </span>
+</h1>
+
+<% unless @user.firstname.blank? or @user.lastname.blank? %>
+  <h2>Vrai nom</h2>
+  <p><%= @user.firstname %> <%= @user.lastname %></p>
+<% end %>
+
+<% unless @user.website.blank? %>
+  <h2>Site web</h2>
+  <p><%= link_to(@user.website.gsub("http://",""), "http://" + @user.website.gsub("http://","")) %></p>
+<% end %>
+
+<% unless @user.description.blank? %>
+  <h2>Bio</h2>
+  <p><%= @user.description %></p>
+<% end %>
+
+<h2>Localisation</h2>
+<p> <%= "#{h(@user.city)}, " unless @user.city.blank? %><%= t("countries.#{@user.country}") %>.</p>
+
+<% if @user.companies.any? %>
+  <h2><%= @user.display_name %> fait partie des sociétés suivantes:</h2>
+  <p><%= @user.companies.map { |u| link_to(thumbnail_for(u,:thumb25) || u.name,company_path(u)) }.join(' ') %></p>
+<% end %>

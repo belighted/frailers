@@ -1,0 +1,13 @@
+<h1>Editer une news</h1>
+
+<%= error_messages_for :article %>
+
+<% form_for :article, :url=>article_path(@article), :html=>{:method => :put} do |f| %>
+  <p>
+	  <%= render :partial=>'form', :locals=>{:f=>f} %>
+	  <%= submit_tag "Mettre à jour" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', article_path(@article) %> |
+<%= link_to 'List', articles_path %>

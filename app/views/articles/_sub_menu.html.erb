@@ -1,0 +1,9 @@
+<ul>
+  <li><%= link_to "Tous les billets", articles_path %></li>
+</ul>
+
+<% if admin? %>
+  <ul class="admin">
+    <li><%= link_to "Créer news", new_article_path %></li>
+  </ul>
+<% end %>

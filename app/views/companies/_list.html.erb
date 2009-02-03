@@ -1,0 +1,13 @@
+<table border="0" cellspacing="0" cellpadding="0" class="wide list with_thumbnails">
+  <tr>
+    <th></th>
+    <th>Nom</th>
+    <th>Pays</th>
+    <th>Membres</th>
+  </tr>
+  <% @companies.each do |company| -%>  
+    <%= render :partial=>"list_item_larger", :locals => { :company => company } %>
+  <% end %>
+</table>
+
+<span style="text-align:right"><%= pagination @companies %></span>

@@ -1,0 +1,7 @@
+<h1><%= @page_title="Membres de #{@company.name}" %></h1>
+
+<% if @users.empty? %>
+<p>Aucun.</p>
+<% else %>
+  <%= render :partial => 'users/list', :locals => { :users => @users } %>
+<% end %>

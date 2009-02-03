@@ -1,0 +1,13 @@
+<tr class="<%= cycle('odd','even') %>">
+  <td><%= link_to(thumbnail_for(user), user_path(user)) %></td>
+  <td>
+    <% if user.real_name -%>
+      <b><%= link_to h(user.real_name), user_path(user) %></b> (<b><%= link_to h(user.display_name), user_path(user) %></b>)
+    <% else -%>
+     <b><%= link_to h(user.display_name), user_path(user) %></b>
+    <% end -%>
+    <br/>
+    <% unless user.description.blank? %><span><%= h(user.description) %></span><br/><% end %>
+  </td>
+  <td><%= "#{h(user.city)}, " unless user.city.blank? %><%= t("countries.#{user.country}") %></td>
+</tr>

@@ -1,0 +1,62 @@
+<p>
+  <label for="event_name">Nom</label><br/>
+  <%= form.text_field :name %><br/>
+  <% if @event.errors.on(:name) %><span class="fieldError">Un nom est obligatoire.</span><% end %>
+</p>
+
+<p>
+  <label for="event_description">Description</label><br />
+  <%= form.text_area :description, :rows => 6 %>
+</p>
+
+<p>
+  <label for="event_venue">Endroit</label><br/>
+  <%= form.text_field :venue %><br/>
+</p>
+
+<p>
+  <label for="event_venue">Rue</label><br/>
+  <%= form.text_field :street %><br/>
+</p>
+
+<p>
+  <label for="event_venue">Numéro</label><br/>
+  <%= form.text_field :street_number %><br/>
+</p>
+
+<p>
+  <label for="event_postal_code">Code postal</label><br />
+  <%= form.text_field :postal_code %>
+</p>
+
+<p>
+  <label for="event_city">Ville</label><br />
+  <%= form.text_field :city %>
+</p>
+
+<p>
+  <label for="event_country">Pays</label><br />
+  <%= form.localized_country_select(:country, [], :include_blank => 'Choisissez...') %>
+</p>
+
+<p>
+  <label for="event_begins_at">Début de l'événément</label><br />
+  <%= form.datetime_select :begins_at %>
+</p>
+
+<p>
+  <label for="event_ends_at">Fin de l'événément</label><br />
+  <%= form.datetime_select :ends_at %>
+</p>
+
+<p>
+  <label for="event_website">Site web</label><br />
+  <%= form.text_field :website %>
+	<span class="entryhelp">(sans le http://)</span><br/>
+  <% if @event.errors.on(:website) %><span class="fieldError">Cet URL n'est pas valide.</span><% end %>
+</p>
+
+<p>
+  <%= form.label :picture, "Image" %><br />
+  <%= form.file_field :picture %>
+</p>

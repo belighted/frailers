@@ -1,0 +1,9 @@
+<h1><%= @page_title="Nouvelle société" %></h1>
+
+<% form_for :company, :url => companies_path, :html => { :multipart => true } do |form| -%>
+
+  <%= render :partial=>"form", :object => form %>
+
+  <p><%= submit_tag "Créer la société" %></p>
+
+<% end -%>

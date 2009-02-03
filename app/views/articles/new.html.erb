@@ -1,0 +1,12 @@
+<h1>Ajouter une news</h1>
+
+<%= error_messages_for :article %>
+
+<% form_for :article, :url=>articles_path do |f| %>
+  <p>
+  	<%= render :partial=>'form', :locals=>{:f=>f} %>
+    <%= submit_tag "Créer" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', articles_path %>

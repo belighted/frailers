@@ -1,0 +1,19 @@
+<% @page_title ="Liste des développeurs Ruby on Rails francophones" %>
+
+<h1>Développeurs <span class="subtitle">Il y a <%= pluralize(@user_count,"développeur") %></span></h1>
+
+<% unless @user_count.zero? %>
+
+  <p class="pagination" style="font-size:70%;margin-bottom:16px;display:block">
+    <% ('A'..'Z').each do |letter| %>
+      <% if User.count(:conditions=>"lastname LIKE '#{letter}%'")>0 %>
+        <%= link_to letter, users_path(:initial=>letter) %>
+      <% else %>
+        <span class="disabled"><%= letter %></span>
+      <% end %>
+    <% end %>
+  </p>
+
+  <%= render :partial => 'list', :locals => { :users => @users} %>
+  
+<% end %>

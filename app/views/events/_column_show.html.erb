@@ -1,0 +1,36 @@
+<% if logged_in? %>
+<div class="element">
+  <div class="content">
+	<ul>
+		<% if admin? || (@event.creator==current_user) %>
+    <li><%= link_to "Editer cet événement", edit_event_path(@event), :class=>"company_edit" %></li>
+    <li><%= link_to "Supprimer cet événement", event_path(@event), :method=>:delete,  :class=>"company_edit" %></li>
+    <% end %>
+    <% if @presence=@event.presences.find_by_user_id(current_user) %>
+      <li><%= link_to "Retirer ma participation à cet événément", event_presence_path(@event,@presence), :method=>:delete, :class=>"company_unsubscribe" %></li>
+    <% else %>
+      <li><%=link_to "Je participe à cet événément", event_presences_path(@event), :method=>:post, :class=>"company_subscribe" %></li>
+    <% end %>
+  </ul>
+  </div>  
+</div>
+<% end %>
+
+<div class="element">
+  <span class="title">Participants</span>
+  <div class="content">
+    <% if @event.users.any? %>
+
+      <p>Il y a <%= pluralize(@event.users.count,"participant") %>.</p>
+
+      <% @event.users.each do |u| %>
+        <%= link_to(thumbnail_for(u,:thumb25),user_path(u)) %>
+      <% end %>
+
+    <% else %>
+
+      <p>Aucun participant pour l'instant.</p>
+
+    <% end %>
+  </div>  
+</div>

@@ -1,0 +1,76 @@
+<h1><%= @page_title='Mon profil' %></h1>
+
+<% form_for :user, :url => user_path(@user), :html => { :multipart => true, :method => :put } do |settings| -%>
+
+<fieldset>
+  <legend>Moi</legend>
+  <p>
+    <label for="user_firstname">Prénom :</label><br />
+    <%= settings.text_field :firstname %>
+  </p>
+  <p>
+    <label for="user_lastname">Nom :</label><br />
+    <%= settings.text_field :lastname %>
+  </p>
+  <p>
+    <label for="display_name">Pseudo :</label><br />
+    <%= settings.text_field :display_name %>
+  </p>
+  <p>
+    <label for="user_website">Site web :</label><br />
+    <%= settings.text_field :website %> 
+  	<span class="entryhelp">(sans le http://)</span>
+  </p>
+  <p>
+    <label for="user_city">Ville :</label><br />
+    <%= settings.text_field :city %>
+  </p>
+  <p>
+    <label for="user_country">Pays :</label><br />
+    <%= settings.localized_country_select(:country, [], :include_blank => 'Choisissez...') %>
+  </p>
+  <p>
+    <label for="user_railer_since">J'utilise Rails depuis :</label><br />
+    <%= settings.date_select :railer_since, :discard_day => true %>
+  </p>
+  <p>
+    <label for="user_description">Une petite description :</label><br />
+    <%= settings.text_area :description, :rows=>6 %>
+  </p>
+  <p>
+    <%= settings.label :picture, "Image" %><br />
+    <%= settings.file_field :picture %>
+  </p>
+</fieldset>
+
+<fieldset>
+  <legend>Ma société</legend>
+  <p>
+    <label for="user_company_name">Nom :</label><br />
+    <%= settings.text_field :company_name %>
+  </p>
+  <p>
+    <label for="user_company_url">Site :</label><br />
+    <%= settings.text_field :company_url %> 
+  	<span class="entryhelp">(sans le http://)</span>
+  </p>
+</fieldset>
+
+<fieldset>
+  <legend>Mes paramètres d'authentification</legend>
+  <p>
+    <label for="user_email">Email :</label><br />
+    <%= settings.text_field :email %>
+  </p>
+  <p>
+    <label for="user_password">Entrez un nouveau mot de passe si vous désirez le changer:</label><br />
+    <%= settings.password_field :password, :size => 16 %>
+    <span class="entryhelp">(une fois)</span><br />
+    <%= settings.password_field :password_confirmation, :size => 16 %>
+    <span class="entryhelp">(à nouveau)</span>
+  </p>
+</fieldset>
+
+  <p style="text-align:right"><%= submit_tag 'Mettre à jour' %></p>
+
+<% end -%>

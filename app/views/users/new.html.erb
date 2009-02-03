@@ -1,0 +1,62 @@
+<h1><%= @page_title="Inscrivez-vous !" %></h1>
+
+<% form_for :user, :url => users_path do |form| -%>
+
+  <div>
+    <label for="user_login">Login</label><br/>
+    <%= form.text_field :login, :onkeypress => 'LoginForm.checkLogin(this)' %>
+    <% if @user.errors.on(:login) %>
+      <div class="fieldError">Ce login <%= error_for(:user,:login) %></div>
+    <% else %>
+      <div class="fieldHelp">Minimum 2 lettres. Peut contenir des lettres, des chiffres, ou le caractère souligné.</div>
+    <% end %>
+  </div>
+  
+  <div style="margin-top:1em">
+    <label for="user_firstname">Prénom :</label><br />
+    <%= form.text_field :firstname %>
+    <% if @user.errors.on(:firstname) %>
+      <div class="fieldError">Ce prénom <%= error_for(:user,:firstname) %></div>
+    <% end %>
+  </div>
+  
+  <div style="margin-top:1em">
+    <label for="user_lastname">Nom :</label><br />
+    <%= form.text_field :lastname %>
+    <% if @user.errors.on(:lastname) %>
+      <div class="fieldError">Ce nom <%= error_for(:user,:lastname) %></div>
+    <% end %>
+  </div>
+
+  <div style="margin-top:1em">
+    <label for="user_email">Email</label><br/>
+    <%= form.text_field :email %>
+    <% if @user.errors.on(:email) %>
+      <div class="fieldError">Cette adresse <%= error_for(:user,:email) %></div>
+    <% end %>
+  </div>
+
+  <div style="margin-top:1em">
+    <label for="display_name">Pseudo (optionnel)</label><br/>
+    <%= form.text_field :display_name %>
+  </div>
+  
+  <div style="margin-top:1em">
+    <label for="user_country">Pays</label><br/>
+    <%= form.localized_country_select(:country, [], :include_blank => 'Choisissez...') %>
+  </div>
+  
+  <div style="margin-top:1em" id="password_fields">
+  	<label for="user_password">Mot de passe</label><br/>
+    <%= form.password_field :password %> (une fois)<br/>
+    <%= form.password_field :password_confirmation %> (à nouveau)
+    <% if @user.errors.on(:password) %>
+      <div class="fieldError">Ce mot de passe <%= error_for(:user,:password) %></div>
+    <% else %>
+  	  <div class="fieldHelp">Entrez votre mot de passe deux fois. Il doit faire au moins 5 caractères.</div>
+  	<% end %>
+  </div>
+
+  <p><%= submit_tag "S'inscrire!" %></p>
+
+<% end -%>
