@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   attr_reader :password
   attr_protected :admin, :login, :created_at, :updated_at, :last_login_at,:activated
   
-  PASSWORD_SALT = YAML.load_file(File.join(Rails.root,'config','password_salt.yml')) # put the secret value of your choice in that file
+  PASSWORD_SALT = Frailers::CONFIG["password_salt"] # put the secret value of your choice in that file
 
   def self.authenticate(login, password, activated=true)
     find_by_login_and_password_hash_and_activated(login, Digest::SHA1.hexdigest("#{password}#{PASSWORD_SALT}"), activated)
