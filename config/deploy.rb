@@ -20,14 +20,17 @@ task :production do
     task :restart, :roles => :app do
       run "touch #{current_path}/tmp/restart.txt"
     end
-  end 
+  end   
+  after "deploy:update_code" do
+    run "cd #{current_path} && bundle install --without=test"
+  end
+  before :deploy, "deploy:cleanup"
+  before "deploy:symlink" do
+    run "ln -s #{shared_path}/uploads                    #{release_path}/public/uploads"
+    run "ln -s #{shared_path}/config/database.yml        #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/config/config.yml          #{release_path}/config/config.yml"
+  end
   namespace :deploy do
     %w(start restart).each { |name| task name, :roles => :app do passenger.restart end }
-    desc "Symlink the assets directories"
-    task :before_symlink do
-      run "ln -s #{shared_path}/uploads                    #{release_path}/public/uploads"
-      run "ln -s #{shared_path}/config/database.yml        #{release_path}/config/database.yml"
-      run "ln -s #{shared_path}/config/config.yml          #{release_path}/config/config.yml"
-    end
   end
 end
